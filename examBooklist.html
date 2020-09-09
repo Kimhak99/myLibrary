@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Javascript Exam-Book List</title>
+	
+  <meta charset="utf-8">
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</head>
+<body onload="loadData(), loadDataVisitor(), loadDataToForm(), loadDataCard()">
+<div class="row ">
+    <!------------------------------------------- Chart -------------------------------------------------->
+  <div class="col-xl-12 col-lg-12">
+    <div class="card shadow mb-4">
+      <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+        <h2 class="m-0 font-weight-bold"> LIBRARY </h2>
+      </div>
+            <!-- Nav tabs -->
+          <div class="container">
+              <ul class="nav nav-tabs row">
+                  <li class="nav-item col-md-6 col-lg-3">
+                      <a class="nav-link active" data-toggle="tab" href="#books">Books</a>
+                  </li>
+                  <li class="nav-item col-md-6 col-lg-3">
+                      <a class="nav-link" data-toggle="tab" href="#visitors">Visitors</a>
+                  </li>
+                  <li class="nav-item col-md-6 col-lg-3">
+                      <a class="nav-link" data-toggle="tab" href="#cards">Cards</a>
+                  </li>
+                  <li class="nav-item col-md-6 col-lg-3">
+                      <a class="nav-link" data-toggle="tab" href="#statistics">Statistics</a>
+                  </li>
+              </ul>
+               
+          <!-- Tab panes -->
+          <div class="tab-content">
+            <!-- book tab -->
+            <div id="books" class="container tab-pane active">
+            <br>
+            <div class="upperContent">
+              <h3>All Books:</h3>
+              <button class="newbook button btn btn-success" data-target="#mymodel" data-toggle="modal">New Book</button>
+            </div>
+
+            <div class="lowerContent">
+            <hr>
+							 <b>Sort by:</b>
+							 <select name="type" required id="sort">
+								 <option value="name">Name</option>
+								 <option value="author">Author</option>
+								 <option value="copy">Number of Copies</option>		
+							 </select><button id="sortbtn" class="smallbtn">Sort</button>
+              <span class="search"><b>Search: </b><input type="text" id="searchbook"><button class="smallbtn" id="searchbtn">Search</button></span>
+
+            </div>  
+            <!-- show detail -->
+            <div class="table-responsive">
+            <div class="card-body">
+              <h5 class="card-title">Details of all books</h5>
+             <table class="table table-dark table-hover table-border table-condensed" id="booktable">
+              <!-- <thead> -->
+               <tr>
+                 <th scope="col">ID</th>
+                 <th scope="col">Title</th>
+                 <th scope="col">Author</th>
+                 <th scope="col">Year</th>
+                 <th scope="col">Publisher</th>
+                 <th scope="col">Number of Pages</th>
+                 <th scope="col">Numer of Copies</th>
+                <th scope="col">Actions</th>
+               </tr>
+             <!-- </thead> -->
+             <tbody id="tablerows">
+               
+             </tbody>
+             </table>
+            </div>
+          </div>
+           <!-- end show details -->
+          </div>
+            <!-- end book tab -->
+
+            <!-- visitor tab -->
+             <div id="visitors" class="container tab-pane fade">
+            <br>
+               <div class="upperContent">
+                  <h3>All Visitors:</h3>
+                  <button class="newvisitor button btn btn-success" data-target="#mymodel1" data-toggle="modal">New Visitor</button>
+               </div>
+               <div class="lowerContent">
+               <hr>
+                  <b>Sort by:</b>
+                  <select name="type" required id="sortVisitor">
+                    <option value="id">Id</option>
+                    <option value="name">Name</option>
+                  </select><button class="smallbtn" id="vSelectBtn">Sort</button>
+              
+                  <span class="search"><b>Search: </b><input type="text" id="searchvisitor"><button class="smallbtn" id="vSearchBtn">Search</button></span>
+              </div>  
+              <!-- show detail -->
+            <!-- show detail -->
+            <div class="table-responsive">
+            <div class="card-body">
+              <h5 class="card-title">Details of all visitors</h5>
+             <table class="table table-dark table-hover table-border table-condensed" id="visitortable">
+              <!-- <thead> -->
+               <tr onclick="myFunction(this)">
+                 <th scope="col">ID</th>
+                 <th scope="col">Full name</th>
+                 <th scope="col">Phone number</th>
+                 <th scope="col">Actions</th>
+               </tr>
+             <!-- </thead> -->
+             <tbody id="visitortablerows">
+               
+             </tbody>
+             </table>
+            </div>
+          </div>
+           <!-- end show details -->
+            </div>
+            <!-- end visitor tab --> 
+
+            <!-- card tab -->
+            <div id="cards" class="container tab-pane fade">
+            <br>
+            <div class="upperContent">
+              <h3>All Cards:</h3>
+              <button class="newCardBtn button btn btn-success" data-target="#mymodel2" data-toggle="modal">New Card</button>
+            </div>
+
+            <div class="lowerContent">
+            <hr>  
+              <b>Sort by:</b>
+              <select name="type" required id="sortCard">
+                <option value="id">Id</option>
+                <option value="return">Return Date</option>
+              </select><button class="smallbtn" id="btnCard">Sort</button>    
+              <span class="search"><b>Search: </b><input type="text" id="searchcard"><button id="cardSearchBtn" class="smallbtn">Search</button></span>
+            </div>
+             <!-- show detail -->
+            <div class="table-responsive">
+            <div class="card-body">
+              <h5 class="card-title">Details of Cards</h5>
+             <table class="table table-dark table-hover table-border table-condensed" id="cardtable">
+              <!-- <thead> -->
+               <tr>
+                 <th scope="col">ID</th>
+                 <th scope="col">Visitor</th>
+                 <th scope="col">Book</th>
+                 <th scope="col">Borrow Date</th>
+                 <th scope="col">Return Date</th>
+               </tr>
+             <!-- </thead> -->
+             <tbody id="cardTableRows">
+               
+             </tbody>
+             </table>
+            </div>
+          </div>
+           <!-- end show details -->
+            </div>
+            <!-- end card tab --> 
+
+            <!-- statistic tab -->
+
+            <div id="statistics" class="container tab-pane fade">
+              <br>
+              <div class="upperContent">
+              <h3>Statistics:</h3>
+              </div>
+            <div class="lowerContent">
+              <hr> 
+              </select><button class="bigbtn btn btn-success" id="popBook">View 5 most popular books</button>
+              <span class="search"></select><button class="bigbtn btn btn-success" id="activeVisitor">View 5 most active visitors</button></span>
+            </div>
+            <div class="row ">
+             <!-- show detail -->
+            <div class="table-responsive">
+            <div class="card-body">
+              <h5 class="card-title">Statistics Table</h5>
+             <table class="table table-dark table-hover table-border table-condens" id="statistictable" style="display: none;">
+              <!-- <thead> -->
+               <tr>
+                 <th scope="col">Range</th>
+                 <th scope="col">5 most active visitors</th>
+                 <th scope="col">Number of times loaning books</th>
+               </tr>
+             <!-- </thead> -->
+             <tbody id="statisticTableRows">
+              <tr>
+                
+              </tr>
+
+             </tbody>
+             </table>
+            </div>
+          </div>
+           <!-- end show details -->
+         </div>
+           <!-- show detail -->
+            <div class="table-responsive">
+            <div class="card-body">
+              <!-- <h5 class="card-title">Statistics</h5> -->
+             <table class="table table-dark table-hover table-border table-condens" id="statistictable1" style="display: none;">
+              <!-- <thead> -->
+               <tr>
+                 <th scope="col">Range</th>
+                 <th scope="col">5 most popular books</th>
+                 <th scope="col">Number of times books getting loaned</th>
+               </tr>
+             <!-- </thead> -->
+             <tbody id="statisticTableRows1">
+          
+
+             </tbody>
+             </table>
+            </div>
+          </div>
+           <!-- end show details -->
+          </div>
+            
+          <!-- end statistic tab -->
+
+       
+        </div>
+         <!-- end tab content -->
+      </div>
+    </div>  
+  </div>
+</div>
+
+
+
+<!-- model form for book -->
+    <div class="modal" id="mymodel">
+      <div class="model-dialog modal-dialog-centered">
+        <div class="modal-content">
+
+          <div class="modal-header">
+             <h3 class="text-primary">Add New Book</h3>
+              <button class="close" type="button" data-dismiss="modal"> &times; </button>
+          </div>
+          <div class="modal-body">
+            <form name="formBook" onsubmit="return validateForm()" method="post"> 
+              <div class="form-group">
+                  <label> Title: </label>
+                  <input type="text" name="tName" id="booktitle" class="form-control" required>
+              </div>
+              <div class="form-group">
+                  <label> Author's name: </label>
+                  <input type="text" name="aName" id="bookauthor" class="form-control" required>
+              </div>
+              <div class="form-group">
+                  <label> Year of publishing: </label>
+                  <input type="Number" name="year" id="year" min="0" class="form-control" required>
+              </div>
+              <div class="form-group">
+                  <label> Publisher: </label>
+                  <input type="text" name="publisher" id="publisher" class="form-control" required>
+              </div>
+              <div class="form-group">
+                 <label> Number of pages: </label>
+                 <input type="Number" name="page" id="pagenum" min="0" class="form-control" required>
+              </div>
+              <div class="form-group">
+                <label> Number of copies in the library: </label>
+                <input type="Number" name="copynum" id="copynum" min="0" class="form-control" required> 
+              </div>
+              <div class="modal-footer">
+                 <input type="submit" value="SAVE" class="savebtn btn btn-danger">
+              </div>
+            </form>
+              </div>
+                                  
+          </div>                                    
+      </div>
+   </div>
+   <!-- end model for book -->
+
+<!-- model for visitor -->
+
+    <div class="modal" id="mymodel1">
+      <div class="model-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+             <h3 class="text-primary">Add New Visitor</h3>
+              <button class="close" type="button" data-dismiss="modal"> &times; </button>
+          </div>
+          <div class="modal-body">
+            <form id="vform" name="formVisitor" onsubmit="return validateFormVisitor()" method="post">
+              <div class="form-group">
+                  <label> Full name: </label>
+                  <input type="text" name="" class="form-control" id="name" required>
+              </div>
+              <div class="form-group">
+                  <label> Phone number: </label>
+                  <input type="text" name="" class="form-control" id="number" required>
+              </div>
+              <div class="modal-footer">
+                 <input type="submit" value="SAVE"class="vSavebtn btn-danger">
+              </div>  
+            </form>
+              </div>
+                                
+          </div>                                    
+      </div>
+   </div>
+
+<!-- end model for visitor -->
+
+
+<!-- model for card -->
+ <div class="modal" id="mymodel2">
+      <div class="model-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+             <h3 class="text-primary">Add New Card</h3>
+              <button class="close" type="button" data-dismiss="modal"> &times; </button>
+          </div>
+          <div class="modal-body">
+            <form id="cform" onsubmit="return validateFormCard()" method="post">
+              <div class="form-group">
+                  <label> Visitors: </label>
+                  <select name="type" required class="form-control" id="visitor">
+                    <option selected="true" disabled="disabled"></option>
+                  </select>
+              </div>
+              <div class="form-group">
+                  <label> Books: </label>
+                  <select name="type" required class="form-control" id="book">
+                    <option selected="true" disabled="disabled"></option>
+                  </select>
+              </div>
+              <div class="modal-footer">
+                 <input type="submit" class="cardSavebtn btn btn-danger" value="SAVE">
+              </div> 
+            </form>
+              </div>
+                                 
+          </div>                                    
+      </div>
+   </div>
+
+
+  </body>
+
+	<script src="script.js"></script>
+  <script src="visitor.js"></script>
+  <script src="card.js"></script>
+  <script src="statistic.js"></script>
+
+</body>
+</html>

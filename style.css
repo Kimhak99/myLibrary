@@ -1,0 +1,109 @@
+body{
+	height: 100vh;
+	width: 100%;
+	
+}
+
+h2{
+	color: black;
+	padding-top: 30px;
+	padding-left: 30px;
+	padding-bottom: 20px;
+}
+
+.tab-content{
+	border-top: 4px solid coral;
+	border-bottom: 4px solid coral;
+	padding: 20px 0;
+
+}
+
+.tab-content h3{
+	font-size: 30px;
+	color: coral;
+	float: left;
+}
+.button{
+	float: right;
+	width: 150px;
+	border-radius: 5px;
+
+}
+.card-header{
+  height: 100px;
+  background-color: red;
+  background-image:
+  linear-gradient(red, #f06d06);
+}
+
+.nav-tabs .nav-link{
+	width: calc(100%);
+	text-align: center;
+	background-color: #000d;
+	display: inline-block !important;
+	border-radius: 0px;
+	color: #ffffaa;
+	font-weight: bold;
+	line-height: 40px;
+/*	padding-left: 111.3px;
+	padding-right: 111.3px;
+*/
+}
+
+
+.nav-tabs .nav-link .active{
+	background-color: #ffffaa;
+	border: none;
+	margin-bottom: 0;
+}
+.column{
+	float: left;
+}
+.container{
+	width: 100%;
+}
+.container .upperContent{
+	width: 100%;
+}
+.container .lowerContent{
+	padding-top: 50px;
+	width: 100%;
+	margin-bottom: 20px;
+
+}
+.lowerContent .column{
+	float: left;
+}
+.lowerContent .search{
+	float: right;
+
+}
+
+
+.smallbtn{
+	width: 80px;
+	border-radius: 5px;
+ 	margin-left: 10px;
+}
+
+.bigbtn{
+	width: 300px;
+	border-radius: 5px;
+
+}
+
+
+/*form*/
+/* modal background */
+#mymodel, #mymodel1, #mymodel2{
+	width: 50%;
+	left: 25%;
+
+}
+
+ @media screen and (min-width: 500px) and (max-width: 768px)  {
+.lowerContent .search{
+	float: left;
+
+}
+  }
